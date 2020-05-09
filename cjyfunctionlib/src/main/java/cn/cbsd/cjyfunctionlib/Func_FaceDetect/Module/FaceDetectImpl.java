@@ -611,6 +611,9 @@ public class FaceDetectImpl implements IFace {
     RectF rectF = new RectF();
 
     private void showFrame(LivenessModel model) {
+        if (textureView == null){
+            return;
+        }
         Canvas canvas = textureView.lockCanvas();
         if (canvas == null) {
             textureView.unlockCanvasAndPost(canvas);
@@ -662,6 +665,7 @@ public class FaceDetectImpl implements IFace {
         textureView.unlockCanvasAndPost(canvas);
 
     }
+
 
     public Rect getFaceRectTwo(FaceInfo faceInfo, ImageFrame frame) {
         Rect rect = new Rect();

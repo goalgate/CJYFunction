@@ -23,7 +23,7 @@ public class IDCardImpl implements IIDCard {
     public void onOpen(IIdCardListener listener) {
         mylistener = listener;
         try {
-            cardInfo = new BoyaCardAdapter(115200, "/dev/ttyS1", m_onCardState);
+            cardInfo = new BoyaCardAdapter(115200, "/dev/ttyS0", m_onCardState);
 //            cardInfo = new ReadCard2(115200, "/dev/ttyS1", m_onCardState);
             cdevfd = cardInfo.open();
             if (cdevfd >= 0) {

@@ -10,7 +10,8 @@ public interface TestApi {
 
     @FormUrlEncoded
     @POST("cjy/s/updata")
-    Observable<String> withDataRs(@Field("dataType") String dataType, @Field("key") String key, @Field("jsonData") String jsonData);
+    Observable<String> withDataRs(@Field("dataType") String dataType, @Field("key") String key,
+                                  @Field("jsonData") String jsonData);
 
 
     @FormUrlEncoded

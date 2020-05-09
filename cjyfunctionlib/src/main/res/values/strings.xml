@@ -46,4 +46,12 @@
     <string name="btn_faceIdentify">人脸单次识别</string>
     <string name="btn_faceNormal">正常模式</string>
 
+    <string name="func_identify">身份证功能模块</string>
+    <string name="func_fingerPrint">指纹功能模块</string>
+    <string name="func_face">人脸识别功能模块</string>
+    <string name="func_collectionbox">网络采集盒功能模块</string>
+    <string name="func_switch">开关量功能模块</string>
+    <string name="func_cjyextens">采集器硬件功能模块</string>
+
+
 </resources>

@@ -21,9 +21,15 @@ import android.widget.Toast;
 import com.baidu.aip.entity.User;
 import com.baidu.aip.face.AutoTexturePreviewView;
 import com.baidu.aip.manager.FaceSDKManager;
+import com.baidu.aip.utils.FileUitls;
+import com.baidu.aip.utils.ImageUtils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import cn.cbsd.cjyfunctionlib.Func_FaceDetect.presenter.FacePresenter;
@@ -37,6 +43,8 @@ import io.reactivex.disposables.Disposable;
 import static cn.cbsd.cjyfunctionlib.Func_FaceDetect.Module.FaceDetectImpl.FEATURE_DATAS_UNREADY;
 
 public class FaceDetectActivity extends Activity implements IFaceView {
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 
     public FacePresenter fp = FacePresenter.getInstance();
 
@@ -174,6 +182,30 @@ public class FaceDetectActivity extends Activity implements IFaceView {
     public void onText(FacePresenter.FaceAction action, FacePresenter.FaceResultType resultType, String text) {
         switch (resultType) {
             case IMG_MATCH_IMG_Score:
+                break;
+            case Identify_failed:
+                Bitmap bitmap = fp.getGlobalBitmap();
+                File faceDir = FileUitls.getFaceDirectory();
+                if (faceDir != null) {
+                    String imageName = "IMG_" + formatter.format(new Date(System.currentTimeMillis())) + ".png";
+                    File file = new File(faceDir, imageName);
+                    if (!file.exists()) {
+                        try {
+                            file.createNewFile();
+                            FileOutputStream fos = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.flush();
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    ImageUtils.resize(bitmap, file, 300, 300);
+                } else {
+                    Toast.makeText(this, "人脸目录未找到", Toast.LENGTH_SHORT).show();
+                }
+                tv_info.setText(text);
+
                 break;
             default:
                 tv_info.setText(text);

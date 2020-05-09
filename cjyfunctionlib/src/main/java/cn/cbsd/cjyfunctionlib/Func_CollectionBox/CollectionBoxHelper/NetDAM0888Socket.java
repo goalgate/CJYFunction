@@ -391,7 +391,11 @@ public class NetDAM0888Socket {
         } catch (IOException e) {
             Log.e("NetDAM0888Socket.close", e.toString());
             e.printStackTrace();
+        }catch (NullPointerException e){
+            Log.e("NetDAM0888Socket.close", e.toString());
+            e.printStackTrace();
         }
+
 
     }
 

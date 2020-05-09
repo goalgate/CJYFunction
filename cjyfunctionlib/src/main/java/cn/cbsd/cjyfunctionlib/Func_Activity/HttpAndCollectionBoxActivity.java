@@ -194,7 +194,7 @@ public class HttpAndCollectionBoxActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        netDa.close();
+        if (netDa != null) netDa.close();
     }
 
 
